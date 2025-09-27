@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Widget - Exemplos de Integração</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        .example {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example h3 {
+            margin-top: 0;
+            color: #25D366;
+        }
+
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        .demo-button {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 14px;
+        }
+
+        .demo-button:hover {
+            background: #128C7E;
+        }
+
+        .config-panel {
+            background: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            height: 60px;
+            resize: vertical;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .theme-preview {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 5px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .theme-preview:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-preview.selected {
+            border-color: #333;
+        }
+
+        #generated-code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 WhatsApp Widget - Exemplos de Integração</h1>
+
+        <p>Este widget permite adicionar um botão flutuante do WhatsApp em qualquer site de forma simples e personalizável.</p>
+
+        <!-- Configurador Visual -->
+        <div class="config-panel">
+            <h2>⚙️ Configurador Visual</h2>
+            <p>Configure seu widget e gere o código automaticamente:</p>
+
+            <div class="grid">
+                <div>
+                    <div class="form-group">
+                        <label for="phone">Número do WhatsApp *</label>
+                        <input type="text" id="phone" placeholder="5541999999999" value="5541999999999">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensagem Pré-definida</label>
+                        <textarea id="message" placeholder="Olá! Como posso ajudá-lo?">Olá! Como posso ajudá-lo?</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Posição</label>
+                        <select id="position">
+                            <option value="bottom-right">Inferior Direita</option>
+                            <option value="bottom-left">Inferior Esquerda</option>
+                            <option value="top-right">Superior Direita</option>
+                            <option value="top-left">Superior Esquerda</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="size">Tamanho</label>
+                        <select id="size">
+                            <option value="small">Pequeno</option>
+                            <option value="medium" selected>Médio</option>
+                            <option value="large">Grande</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group">
+                        <label for="tooltip">Texto do Tooltip</label>
+                        <input type="text" id="tooltip" value="Fale conosco no WhatsApp">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tema</label>
+                        <div id="theme-selector">
+                            <div class="theme-preview selected" data-theme="default" style="background: #25D366;" title="Padrão"></div>
+                            <div class="theme-preview" data-theme="dark" style="background: #1f2937;" title="Escuro"></div>
+                            <div class="theme-preview" data-theme="blue" style="background: #3b82f6;" title="Azul"></div>
+                            <div class="theme-preview" data-theme="purple" style="background: #8b5cf6;" title="Roxo"></div>
+                            <div class="theme-preview" data-theme="red" style="background: #ef4444;" title="Vermelho"></div>
+                            <div class="theme-preview" data-theme="orange" style="background: #f97316;" title="Laranja"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="industry">Configuração por Setor</label>
+                        <select id="industry">
+                            <option value="">Selecione um setor</option>
+                            <option value="ecommerce">E-commerce</option>
+                            <option value="restaurante">Restaurante</option>
+                            <option value="servicos">Serviços</option>
+                            <option value="suporte">Suporte</option>
+                            <option value="imobiliaria">Imobiliária</option>
+                            <option value="educacao">Educação</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="integration-method">Método de Integração</label>
+                        <select id="integration-method">
+                            <option value="script-tag">Script Tag (Recomendado)</option>
+                            <option value="data-attributes">Data Attributes</option>
+                            <option value="javascript">JavaScript Manual</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button class="demo-button" onclick="generateCode()">🔄 Gerar Código</button>
+            <button class="demo-button" onclick="previewWidget()">👁️ Visualizar</button>
+            <button class="demo-button" onclick="copyCode()">📋 Copiar Código</button>
+
+            <h3>Código Gerado:</h3>
+            <div id="generated-code">Clique em "Gerar Código" para ver o código de integração</div>
+        </div>
+
+        <!-- Exemplos de Integração -->
+        <div class="example">
+            <h3>1. Integração Básica (Mais Simples)</h3>
+            <p>Adicione estas duas linhas no final do seu HTML, antes do fechamento da tag <code>&lt;/body&gt;</code>:</p>
+            <pre><code>&lt;!-- WhatsApp Widget --&gt;
+&lt;script&gt;
+window.whatsappWidgetConfig = {
+    phoneNumber: '5541999999999',
+    message: 'Olá! Como posso ajudá-lo?'
+};
+&lt;/script&gt;
+&lt;script src="whatsapp-widget.min.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="example">
+            <h3>2. Integração via Data Attributes</h3>
+            <p>Use atributos HTML para configurar o widget:</p>
+            <pre><code>&lt;!-- WhatsApp Widget --&gt;
+&lt;script 
+    data-whatsapp-number="5541999999999"
+    data-whatsapp-message="Olá! Como posso ajudá-lo?"
+    data-whatsapp-position="bottom-right"
+    data-whatsapp-size="medium"
+    data-whatsapp-tooltip-text="Fale conosco"
+    src="whatsapp-widget.min.js"&gt;
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="example">
+            <h3>3. Integração Avançada com Temas</h3>
+            <p>Use temas predefinidos e configurações por setor:</p>
+            <pre><code>&lt;!-- WhatsApp Widget com Configurações Avançadas --&gt;
+&lt;script src="whatsapp-widget-config.min.js"&gt;&lt;/script&gt;
+&lt;script src="whatsapp-widget.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+// Configuração para e-commerce com tema azul
+var config = whatsappConfig.createConfig({
+    baseConfig: {
+        phoneNumber: '5541999999999'
+    },
+    theme: 'blue',
+    industry: 'ecommerce',
+    businessHours: 'comercial'
+});
+
+new WhatsAppWidget(config);
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="example">
+            <h3>4. Integração via CDN</h3>
+            <p>Carregue diretamente de um CDN (substitua pela URL real):</p>
+            <pre><code>&lt;!-- WhatsApp Widget via CDN --&gt;
+&lt;script&gt;
+window.whatsappWidgetConfig = {
+    phoneNumber: '5541999999999',
+    message: 'Olá! Como posso ajudá-lo?',
+    position: 'bottom-right',
+    theme: 'default'
+};
+&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget@latest/whatsapp-widget.min.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="example">
+            <h3>5. Integração via NPM</h3>
+            <p>Para projetos que usam bundlers como Webpack, Rollup, etc:</p>
+            <pre><code># Instalar via NPM
+npm install whatsapp-widget-js
+
+# Usar no seu projeto
+import WhatsAppWidget from 'whatsapp-widget-js';
+
+const widget = new WhatsAppWidget({
+    phoneNumber: '5541999999999',
+    message: 'Olá! Como posso ajudá-lo?',
+    position: 'bottom-right',
+    size: 'medium'
+});</code></pre>
+        </div>
+
+        <div class="example">
+            <h3>6. Controle Programático</h3>
+            <p>Controle o widget via JavaScript:</p>
+            <pre><code>&lt;script src="whatsapp-widget.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+// Criar widget
+var widget = new WhatsAppWidget({
+    phoneNumber: '5541999999999',
+    message: 'Olá! Como posso ajudá-lo?'
+});
+
+// Controlar o widget
+function hideWidget() {
+    widget.hide();
+}
+
+function showWidget() {
+    widget.show();
+}
+
+function updateWidget() {
+    widget.updateConfig({
+        message: 'Nova mensagem!',
+        backgroundColor: '#ff0000'
+    });
+}
+
+function removeWidget() {
+    widget.destroy();
+}
+&lt;/script&gt;
+
+&lt;button onclick="hideWidget()"&gt;Esconder&lt;/button&gt;
+&lt;button onclick="showWidget()"&gt;Mostrar&lt;/button&gt;
+&lt;button onclick="updateWidget()"&gt;Atualizar&lt;/button&gt;
+&lt;button onclick="removeWidget()"&gt;Remover&lt;/button&gt;</code></pre>
+        </div>
+
+        <!-- Demonstração ao vivo -->
+        <div class="example">
+            <h3>7. Demonstração ao Vivo</h3>
+            <p>Teste diferentes configurações:</p>
+            <button class="demo-button" onclick="createWidget('default')">Widget Padrão</button>
+            <button class="demo-button" onclick="createWidget('ecommerce')">E-commerce</button>
+            <button class="demo-button" onclick="createWidget('restaurante')">Restaurante</button>
+            <button class="demo-button" onclick="createWidget('suporte')">Suporte</button>
+            <button class="demo-button" onclick="removeCurrentWidget()">Remover Widget</button>
+        </div>
+    </div>
+
+    <!-- Carregar os scripts do widget -->
+    <script src="../src/whatsapp-widget-config.js"></script>
+    <script src="../src/whatsapp-widget.js"></script>
+
+    <script>
+        var currentWidget = null;
+        var selectedTheme = 'default';
+
+        // Configurações de demonstração
+        var demoConfigs = {
+            default: {
+                phoneNumber: '5541999999999',
+                message: 'Olá! Como posso ajudá-lo?',
+                position: 'bottom-right'
+            },
+            ecommerce: {
+                phoneNumber: '5541999999999',
+                theme: 'blue',
+                industry: 'ecommerce',
+                position: 'bottom-right'
+            },
+            restaurante: {
+                phoneNumber: '5541999999999',
+                theme: 'orange',
+                industry: 'restaurante',
+                position: 'bottom-left'
+            },
+            suporte: {
+                phoneNumber: '5541999999999',
+                theme: 'red',
+                industry: 'suporte',
+                position: 'bottom-right'
+            }
+        };
+
+        // Criar widget de demonstração
+        function createWidget(type) {
+            removeCurrentWidget();
+
+            var config = demoConfigs[type];
+            if (config.theme && config.industry) {
+                config = whatsappConfig.createConfig({
+                    baseConfig: { phoneNumber: config.phoneNumber },
+                    theme: config.theme,
+                    industry: config.industry
+                });
+                config.position = demoConfigs[type].position;
+            }
+
+            currentWidget = new WhatsAppWidget(config);
+        }
+
+        // Remover widget atual
+        function removeCurrentWidget() {
+            if (currentWidget) {
+                currentWidget.destroy();
+                currentWidget = null;
+            }
+        }
+
+        // Seletor de tema
+        document.querySelectorAll('.theme-preview').forEach(function (element) {
+            element.addEventListener('click', function () {
+                document.querySelectorAll('.theme-preview').forEach(function (el) {
+                    el.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                selectedTheme = this.getAttribute('data-theme');
+            });
+        });
+
+        // Gerar código
+        function generateCode() {
+            var config = {
+                phoneNumber: document.getElementById('phone').value,
+                message: document.getElementById('message').value,
+                position: document.getElementById('position').value,
+                size: document.getElementById('size').value,
+                tooltipText: document.getElementById('tooltip').value
+            };
+
+            var industry = document.getElementById('industry').value;
+            var method = document.getElementById('integration-method').value;
+
+            if (selectedTheme !== 'default' || industry) {
+                config = whatsappConfig.createConfig({
+                    baseConfig: config,
+                    theme: selectedTheme !== 'default' ? selectedTheme : null,
+                    industry: industry || null
+                });
+            }
+
+            var embedCode = whatsappConfig.generateEmbedCode(config, { method: method });
+            document.getElementById('generated-code').textContent = embedCode;
+        }
+
+        // Visualizar widget
+        function previewWidget() {
+            removeCurrentWidget();
+
+            var config = {
+                phoneNumber: document.getElementById('phone').value,
+                message: document.getElementById('message').value,
+                position: document.getElementById('position').value,
+                size: document.getElementById('size').value,
+                tooltipText: document.getElementById('tooltip').value
+            };
+
+            var industry = document.getElementById('industry').value;
+
+            if (selectedTheme !== 'default' || industry) {
+                config = whatsappConfig.createConfig({
+                    baseConfig: config,
+                    theme: selectedTheme !== 'default' ? selectedTheme : null,
+                    industry: industry || null
+                });
+            }
+
+            currentWidget = new WhatsAppWidget(config);
+        }
+
+        // Copiar código
+        function copyCode() {
+            var code = document.getElementById('generated-code').textContent;
+            navigator.clipboard.writeText(code).then(function () {
+                alert('Código copiado para a área de transferência!');
+            });
+        }
+
+        // Gerar código inicial
+        generateCode();
+    </script>
+</body>
+
+</html>

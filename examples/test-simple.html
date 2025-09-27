@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Simples - WhatsApp Widget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .test-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 Teste Simples - WhatsApp Widget</h1>
+
+    <div class="test-section">
+        <h2>Teste 1: Widget Básico</h2>
+        <p>Widget com configuração mínima (apenas número do telefone)</p>
+        <button class="test-button" onclick="test1()">Criar Widget Básico</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Teste 2: Widget Completo</h2>
+        <p>Widget com todas as configurações</p>
+        <button class="test-button" onclick="test2()">Criar Widget Completo</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Teste 3: Diferentes Posições</h2>
+        <p>Teste das 4 posições disponíveis</p>
+        <button class="test-button" onclick="testPosition('bottom-right')">Inferior Direita</button>
+        <button class="test-button" onclick="testPosition('bottom-left')">Inferior Esquerda</button>
+        <button class="test-button" onclick="testPosition('top-right')">Superior Direita</button>
+        <button class="test-button" onclick="testPosition('top-left')">Superior Esquerda</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Teste 4: Diferentes Tamanhos</h2>
+        <p>Teste dos 3 tamanhos disponíveis</p>
+        <button class="test-button" onclick="testSize('small')">Pequeno</button>
+        <button class="test-button" onclick="testSize('medium')">Médio</button>
+        <button class="test-button" onclick="testSize('large')">Grande</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Teste 5: Controles</h2>
+        <p>Teste de controles programáticos</p>
+        <button class="test-button" onclick="hideWidget()">Esconder</button>
+        <button class="test-button" onclick="showWidget()">Mostrar</button>
+        <button class="test-button" onclick="updateWidget()">Atualizar</button>
+        <button class="test-button" onclick="destroyWidget()">Destruir</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Status do Teste</h2>
+        <div id="test-status">Nenhum widget criado ainda</div>
+    </div>
+
+    <!-- Carregar o widget -->
+    <script src="../src/whatsapp-widget.js"></script>
+
+    <script>
+        var currentWidget = null;
+
+        function updateStatus(message) {
+            document.getElementById('test-status').innerHTML = message;
+            console.log('Status:', message);
+        }
+
+        function destroyCurrentWidget() {
+            if (currentWidget) {
+                currentWidget.destroy();
+                currentWidget = null;
+            }
+        }
+
+        function test1() {
+            destroyCurrentWidget();
+
+            try {
+                currentWidget = new WhatsAppWidget({
+                    phoneNumber: '5541999999999'
+                });
+                updateStatus('✅ Teste 1: Widget básico criado com sucesso');
+            } catch (error) {
+                updateStatus('❌ Teste 1: Erro - ' + error.message);
+            }
+        }
+
+        function test2() {
+            destroyCurrentWidget();
+
+            try {
+                currentWidget = new WhatsAppWidget({
+                    phoneNumber: '5541999999999',
+                    message: 'Olá! Esta é uma mensagem de teste do widget completo.',
+                    position: 'bottom-right',
+                    backgroundColor: '#25D366',
+                    hoverColor: '#128C7E',
+                    size: 'medium',
+                    showTooltip: true,
+                    tooltipText: 'Clique para testar o WhatsApp',
+                    animation: true
+                });
+                updateStatus('✅ Teste 2: Widget completo criado com sucesso');
+            } catch (error) {
+                updateStatus('❌ Teste 2: Erro - ' + error.message);
+            }
+        }
+
+        function testPosition(position) {
+            destroyCurrentWidget();
+
+            try {
+                currentWidget = new WhatsAppWidget({
+                    phoneNumber: '5541999999999',
+                    message: 'Testando posição: ' + position,
+                    position: position,
+                    tooltipText: 'Posição: ' + position
+                });
+                updateStatus('✅ Teste Posição: Widget criado na posição ' + position);
+            } catch (error) {
+                updateStatus('❌ Teste Posição: Erro - ' + error.message);
+            }
+        }
+
+        function testSize(size) {
+            destroyCurrentWidget();
+
+            try {
+                currentWidget = new WhatsAppWidget({
+                    phoneNumber: '5541999999999',
+                    message: 'Testando tamanho: ' + size,
+                    size: size,
+                    tooltipText: 'Tamanho: ' + size
+                });
+                updateStatus('✅ Teste Tamanho: Widget criado no tamanho ' + size);
+            } catch (error) {
+                updateStatus('❌ Teste Tamanho: Erro - ' + error.message);
+            }
+        }
+
+        function hideWidget() {
+            if (currentWidget) {
+                currentWidget.hide();
+                updateStatus('✅ Widget escondido');
+            } else {
+                updateStatus('❌ Nenhum widget para esconder');
+            }
+        }
+
+        function showWidget() {
+            if (currentWidget) {
+                currentWidget.show();
+                updateStatus('✅ Widget mostrado');
+            } else {
+                updateStatus('❌ Nenhum widget para mostrar');
+            }
+        }
+
+        function updateWidget() {
+            if (currentWidget) {
+                currentWidget.updateConfig({
+                    backgroundColor: '#ff0000',
+                    message: 'Widget atualizado!',
+                    tooltipText: 'Widget foi atualizado'
+                });
+                updateStatus('✅ Widget atualizado com nova configuração');
+            } else {
+                updateStatus('❌ Nenhum widget para atualizar');
+            }
+        }
+
+        function destroyWidget() {
+            if (currentWidget) {
+                destroyCurrentWidget();
+                updateStatus('✅ Widget destruído');
+            } else {
+                updateStatus('❌ Nenhum widget para destruir');
+            }
+        }
+
+        // Teste automático inicial
+        window.addEventListener('load', function () {
+            updateStatus('🚀 Página carregada. Pronto para testes!');
+        });
+    </script>
+</body>
+
+</html>

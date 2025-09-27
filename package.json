@@ -1,0 +1,59 @@
+{
+  "name": "whatsapp-widget-js",
+  "version": "1.0.1",
+  "description": "Widget flutuante reutilizável para WhatsApp que pode ser facilmente incorporado em qualquer site",
+  "main": "src/whatsapp-widget.js",
+  "browser": "dist/whatsapp-widget.min.js",
+  "jsdelivr": "dist/whatsapp-widget.min.js",
+  "unpkg": "dist/whatsapp-widget.min.js",
+  "files": [
+    "src/",
+    "dist/",
+    "examples/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "terser src/whatsapp-widget.js -c -m --comments false -o dist/whatsapp-widget.min.js && terser src/whatsapp-widget-config.js -c -m --comments false -o dist/whatsapp-widget-config.min.js",
+    "dev": "python3 -m http.server 8000",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "whatsapp",
+    "widget",
+    "chat",
+    "floating",
+    "contact",
+    "javascript",
+    "vanilla-js",
+    "no-dependencies",
+    "responsive",
+    "customizable",
+    "cdn",
+    "jsdelivr"
+  ],
+  "author": "Ledz Web Solutions",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ledzweb/whatsapp-widget-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ledzweb/whatsapp-widget-js/issues"
+  },
+  "homepage": "https://github.com/ledzweb/whatsapp-widget-js#readme",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "IE 11"
+  ],
+  "devDependencies": {
+    "terser": "^5.0.0"
+  }
+}
