@@ -1,7 +1,7 @@
 # WhatsApp Widget JS
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/seu-usuario/whatsapp-widget-js)
+[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/ledzweb/whatsapp-widget-js)
 
 Um widget de WhatsApp flutuante, leve, personalizável e sem dependências para qualquer site.
 
@@ -16,12 +16,6 @@ Um widget de WhatsApp flutuante, leve, personalizável e sem dependências para 
 - **Horário de Funcionamento**: Defina mensagens diferentes para dentro e fora do horário comercial.
 - **Responsivo**: Funciona perfeitamente em desktops e dispositivos móveis.
 - **Leve**: Arquivo minificado com menos de 10KB.
-
-## 🚀 Demonstração ao Vivo
-
-Confira o **configurador visual** e exemplos de integração na página de demonstração:
-
-[**Acessar Demonstração e Configurador**](./integration-examples.html)
 
 ## 🛠️ Instalação e Uso
 
@@ -40,7 +34,7 @@ window.whatsappWidgetConfig = {
     position: 'bottom-right' // Posição do widget (opcional)
 };
 </script>
-<script src="https://cdn.jsdelivr.net/gh/seu-usuario/whatsapp-widget@latest/whatsapp-widget.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget@latest/whatsapp-widget.min.js" defer></script>
 ```
 
 ### Método 2: Atributos de Dados
@@ -54,7 +48,7 @@ Configure o widget diretamente na tag de script usando atributos `data-*`.
     data-whatsapp-number="5541999999999"
     data-whatsapp-message="Olá! Gostaria de mais informações."
     data-whatsapp-position="bottom-left"
-    src="https://cdn.jsdelivr.net/gh/seu-usuario/whatsapp-widget@latest/whatsapp-widget.min.js">
+    src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget@latest/whatsapp-widget.min.js">
 </script>
 ```
 
