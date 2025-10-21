@@ -34,7 +34,7 @@ window.whatsappWidgetConfig = {
     position: 'bottom-right' // Posição do widget (opcional)
 };
 </script>
-<script src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget@latest/whatsapp-widget.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget-js@latest/dist/whatsapp-widget.min.js" defer></script>
 ```
 
 ### Método 2: Atributos de Dados
@@ -48,7 +48,7 @@ Configure o widget diretamente na tag de script usando atributos `data-*`.
     data-whatsapp-number="5541999999999"
     data-whatsapp-message="Olá! Gostaria de mais informações."
     data-whatsapp-position="bottom-left"
-    src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget@latest/whatsapp-widget.min.js">
+    src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget-js@latest/dist/whatsapp-widget.min.js">
 </script>
 ```
 
@@ -97,8 +97,8 @@ Personalize o widget com as seguintes opções:
 Para facilitar a personalização, você pode usar temas e configurações predefinidas. Para isso, inclua o arquivo `whatsapp-widget-config.min.js`.
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget@latest/whatsapp-widget-config.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget@latest/whatsapp-widget.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget-js@latest/dist/whatsapp-widget-config.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ledzweb/whatsapp-widget-js@latest/dist/whatsapp-widget.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   // Exemplo: Configuração para e-commerce com tema azul
